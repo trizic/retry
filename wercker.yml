@@ -1,0 +1,28 @@
+box: node:4.2
+
+build:
+  steps:
+
+    - script:
+        name: Remove node_modules (for local wercker builds)
+        code: |
+          rm -rf node_modules
+
+    - npm-install
+
+    - script:
+        name: Generate dist
+        code: |
+          npm run dist
+
+deploy:
+    steps:
+    - script:
+      name: Create NPM Package
+      code: |
+        npm pack
+
+    - script:
+      name: Upload package to S3
+      code: |
+        ./bin/pkgToS3

@@ -1,0 +1,8 @@
+build:
+  - eslint
+  - clean:dist
+  - babel:retry
+
+dist:
+  - build
+  - chmod:bin

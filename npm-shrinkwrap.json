@@ -1,0 +1,16 @@
+{
+  "name": "retry",
+  "version": "1.0.0",
+  "dependencies": {
+    "async": {
+      "version": "1.5.2",
+      "from": "async@>=1.5.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/async/-/async-1.5.2.tgz"
+    },
+    "minimist": {
+      "version": "1.2.0",
+      "from": "minimist@latest",
+      "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz"
+    }
+  }
+}
