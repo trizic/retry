@@ -12,7 +12,8 @@ s3.createBucket({Bucket: 'trizic-npm'}, function() {
   var params = {
     Bucket: 'trizic-npm',
     Key: key,
-    Body: fs.createReadStream(filename)
+    Body: fs.createReadStream(filename),
+    ACL: 'public-read'
   };
 
   s3.putObject(params, function(err, data) {
