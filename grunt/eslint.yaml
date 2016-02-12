@@ -1,0 +1,4 @@
+files:
+    src:
+      - src/bin/retry
+      - src/**/*.js

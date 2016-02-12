@@ -1,0 +1,11 @@
+dist:
+  files:
+    - expand: true
+      src:
+        - src/raml/**
+      dest: dist/
+    - dist/package.json: ./package.json
+    - expand: true
+      src:
+        - src/server/**/*.template
+      dest: dist/

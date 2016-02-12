@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+/* eslint camelcase: 0 */
+import child_process from 'child_process';
+import async from 'async';
+import minimist from 'minimist';
+
+let argv = minimist(process.argv.slice(2));
+
+// Make sure we have a command
+if (!argv._.length) {
+  console.error('ERROR: No command found');
+  process.exit(70);
+}
+
+let maxTries = argv.maxTries || 3;
+let wait = argv.wait || 2 * 1000;
+let syncTries = 0;
+
+console.log('............................');
+console.log('Running:', argv._.slice(-1)[0]);
+console.log(' - max tries:', maxTries);
+console.log(' - wait time:', wait);
+console.log('............................');
+
+/**
+ * Sync the deploy path and invalidate the CDN cache
+ */
+function run(cb) {
+  syncTries++;
+
+  console.log('\n Try: ' + syncTries);
+  console.log('-------------');
+
+  let kid = child_process.spawn(argv[2], process.argv.slice(3), {
+    encoding: 'utf8'
+  });
+
+  kid.stdout.pipe(process.stdout);
+  kid.stderr.pipe(process.stdout);
+
+  kid.on('close', function(code) {
+    return cb(code);
+  });
+}
+
+process.on('uncaughtexception', function() {
+  console.log('Uncaught Error: ', e);
+});
+
+async.auto({
+  run: async.retry({ times: maxTries, interval: wait }, run)
+}, function(err) {
+  if (err) {
+    console.error('ERROR: Command filed after ' + maxTries + ' tries.');
+    process.exit(70);
+  }
+});
