@@ -1,0 +1,4 @@
+node_modules
+*.tgz
+.envrc.private
+_*
