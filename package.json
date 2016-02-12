@@ -1,6 +1,6 @@
 {
   "name": "retry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "dist": "grunt dist"
   },
   "bin": {
-    "retry": "dist/retry"
+    "retry": "dist/bin/retry"
   },
   "author": "",
   "license": "ISC",
