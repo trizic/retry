@@ -17,7 +17,7 @@ let wait = argv.wait || 2 * 1000;
 let syncTries = 0;
 
 console.log('............................');
-console.log('Running:', argv._.slice(-1)[0]);
+console.log('Running:', argv._[0], argv._.slice(1));
 console.log(' - max tries:', maxTries);
 console.log(' - wait time:', wait);
 console.log('............................');
@@ -31,7 +31,7 @@ function run(cb) {
   console.log('\n Try: ' + syncTries);
   console.log('-------------');
 
-  let kid = child_process.spawn(argv[2], process.argv.slice(3), {
+  let kid = child_process.spawn(argv._[0], argv._.slice(1), {
     encoding: 'utf8'
   });
 
